@@ -1,6 +1,12 @@
 # OWASPGPT-10
 The goal of OWASP-GPT10 is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations
 
+# Web UI
+
+Step 1: Enter OpenAI API key and go for it
+
+[OWASPGPT-10](https://owaspgpt-10.streamlit.app/)
+
 # Installation
 
 Option 1: Cloning the Repository
