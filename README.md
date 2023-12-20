@@ -48,7 +48,7 @@ docker run -p 8501:8501 owaspgpt-10
 
 ```
 
-Open a web browser and navigate to http://URL:8501
+Open a web browser and navigate to http://{url}:8501
 
 
 
