@@ -53,7 +53,7 @@ Open a web browser and navigate to http://localhost:8501 to access the app runni
 
 
 
-# Option : Using Docker Container
+# Using Docker Image
 
 Pull the Docker image from Docker Hub:
 
