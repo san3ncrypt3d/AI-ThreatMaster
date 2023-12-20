@@ -57,6 +57,12 @@ Open a web browser and navigate to http://URL:8501
 Pull the Docker image from Docker Hub:
 
 ```
-docker pull
+docker pull san3ncrypt3d/owaspgpt-10:latest
+```
+
+Run the Image
+
+```
+docker run -p 8501:8501 san3ncrypt3d/owaspgpt-10:latest
 
 ```
