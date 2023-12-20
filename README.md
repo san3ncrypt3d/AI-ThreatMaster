@@ -8,7 +8,7 @@ Option 1: Cloning the Repository
 Clone this repository:
 
 ```
-git clone git@github.com:san3ncrypt3d/OWASPGPT-10.git
+git clone https://github.com/san3ncrypt3d/OWASPGPT-10.git
 
 ```
 Change to the cloned repository directory:
