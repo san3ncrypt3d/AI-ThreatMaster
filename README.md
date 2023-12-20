@@ -44,12 +44,11 @@ docker build -t owaspgpt-10 .
 ```
 
 ```
-docker run -p 8501:8501 OWASPGPT-10
+docker run -p 8501:8501 owaspgpt-10
 
 ```
 
-Open a web browser and navigate to http://localhost:8501 to access the app running inside the container.
-
+Open a web browser and navigate to http://URL:8501
 
 
 
