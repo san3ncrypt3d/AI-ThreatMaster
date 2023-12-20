@@ -39,7 +39,7 @@ Open the app in your web browser using the provided URL.
 Run the Docker container:
 
 ```
-docker build -t OWASPGPT-10 .
+docker build -t owaspgpt-10 .
 
 ```
 
