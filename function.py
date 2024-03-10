@@ -256,7 +256,7 @@ st.set_page_config(
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
-    st.image("1.png", width=450)
+    st.image("logo.png", width=350)
 
 
 
