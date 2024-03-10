@@ -45,12 +45,12 @@ Open the app in your web browser using the provided URL.
 Run the Docker container:
 
 ```
-docker build -t owaspgpt-10 .
+docker build -t ai-threatmaster .
 
 ```
 
 ```
-docker run -p 8501:8501 owaspgpt-10
+docker run -p 8501:8501 ai-threatmaster
 
 ```
 
@@ -63,12 +63,12 @@ Open a web browser and navigate to http://{url}:8501
 Pull the Docker image from Docker Hub:
 
 ```
-docker pull san3ncrypt3d/owaspgpt-10:latest
+docker pull san3ncrypt3d/ai-threatmaster
 ```
 
 Run the Image
 
 ```
-docker run -p 8501:8501 san3ncrypt3d/owaspgpt-10:latest
+docker run -p 8501:8501 san3ncrypt3d/ai-threatmaster
 
 ```
