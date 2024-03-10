@@ -385,7 +385,7 @@ with st.sidebar:
     st.markdown(
         "The goal of AI-ThreatMaster is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations"
     )
-    st.markdown("Created by [Sanjay Babu](https://www.linkedin.com/in/sanjay-babu-346500160/)")
+    st.markdown("Created by [Sanjay Babu](https://www.linkedin.com/in/san3ncrypt3d/)")
     
     st.markdown("""---""")
 
@@ -396,13 +396,13 @@ st.sidebar.header("FAQs")
 with st.sidebar:
     st.markdown(
         """
-    ### **What is OWASP Top 10?**
+    ### **What is AI-ThreatMaster?**
     The OWASP (Open Web Application Security Project) Top 10 provides critical insights into the most prevalent security risks across various technology domains, including web applications, mobile apps, cloud services, APIs (Application Programming Interfaces), and the Internet of Things (IoT). These lists outline the most pressing vulnerabilities and threats within each domain, offering guidance and best practices to developers, security professionals, and organizations.
     """
     )
     st.markdown(
         """
-    ### **How does OWASP Top 10 GPT work?**
+    ### **How does AI-ThreatMaster work?**
     When you provide application description and other informations, the tool will use a GPT model to generate a threats for the application. The model uses the application description and details to generate a list of potential threats and then categorises each threat according to the OWASP Top 10 methodology.
     """
     )
@@ -456,7 +456,7 @@ with st.expander("Threat Model", expanded=False):
             st.download_button(
                 label="Download Threat Model",
                 data=markdown_output, 
-                file_name="OWASP_gpt10_threat_model.md",
+                file_name="AI-ThreatMaster_threat_model.md",
                 mime="text/markdown",
             )
 
