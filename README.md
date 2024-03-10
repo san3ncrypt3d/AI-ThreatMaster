@@ -1,11 +1,11 @@
-# OWASPGPT-10
-The goal of OWASP-GPT10 is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations
+# AI-ThreatMaster
+The goal of AI-ThreatMaster is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations
 
 # Web UI
 
 Step 1: Enter OpenAI API key and go for it
 
-[OWASPGPT-10](https://owaspgpt-10.streamlit.app/)
+[AI-ThreatMaster](https://ai-threatmaster.streamlit.app/)
 
 # Installation
 
@@ -14,13 +14,13 @@ Option 1: Cloning the Repository
 Clone this repository:
 
 ```
-git clone https://github.com/san3ncrypt3d/OWASPGPT-10.git
+git clone https://github.com/san3ncrypt3d/AI-ThreatMaster.git
 
 ```
 Change to the cloned repository directory:
 
 ```
-cd OWASPGPT-10
+cd AI-ThreatMaster
 
 ```
 Install the required Python packages:
