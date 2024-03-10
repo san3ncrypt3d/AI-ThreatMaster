@@ -245,7 +245,7 @@ def remediation_azure(api_key, model_name, prompt):
 
 
 st.set_page_config(
-    page_title="OWASP GPT-10",
+    page_title="AI-ThreatMaster",
     page_icon=":fire:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -316,7 +316,7 @@ with col2:
     )
 
 
-st.sidebar.header("How to use OWASP-GPT10")
+st.sidebar.header("How to use AI-ThreatMaster")
 
 with st.sidebar:
    
@@ -380,10 +380,10 @@ st.sidebar.header("About")
 
 with st.sidebar:
     st.markdown(
-        "OWASP-GPT10 - [san3ncrypt3d](https://san3ncrypt3d.com)"
+        "AI-ThreatMaster - [san3ncrypt3d](https://san3ncrypt3d.com)"
     )
     st.markdown(
-        "The goal of OWASP-GPT10 is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations"
+        "The goal of AI-ThreatMaster is to assist teams in crafting more thorough threat models using OWASP top 10 methadology. It achieves this by harnessing the capabilities of OpenAI's GPT models to generate lists of threats and mitigations"
     )
     st.markdown("Created by [Sanjay Babu](https://www.linkedin.com/in/sanjay-babu-346500160/)")
     
