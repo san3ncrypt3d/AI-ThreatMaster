@@ -4,9 +4,7 @@ import streamlit.components.v1 as components
 import re
 from openai import OpenAI
 from openai import AzureOpenAI
-import ollama
 
-local_models = ollama.list()
 
 def get_input():
     input_text = st.text_area(
@@ -173,20 +171,6 @@ def get_threat_model_azure(api_key, model_name, prompt):
 
     return response_content
 
-def get_threat_model_ollama(model_name, prompt):
-
-    response = ollama.chat(
-        model=model_name,
-        format="json",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant designed to output JSON."},
-            {"role": "user", "content": prompt}
-        ]
-    )
-
-    response_content = response['message']['content']
-
-    return response_content
    
 def json_to_markdown(threat_model, improvement_suggestions):
     markdown_output = "## Threat Model\n\n"
@@ -247,7 +231,6 @@ def remediation_azure(api_key, model_name, prompt):
 
     response = client.chat.completions.create(
         model = azure_deployment_name,
-        format="json",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that provides threat mitigation strategies in Markdown format."},
             {"role": "user", "content": prompt}
@@ -255,20 +238,6 @@ def remediation_azure(api_key, model_name, prompt):
     )
 
     mitigations = response.choices[0].message.content
-
-    return mitigations
-
-def remediation_ollama(model_name, prompt):
-
-    response = ollama.chat(
-        model=model_name,
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant that provides threat mitigation strategies in Markdown format."},
-            {"role": "user", "content": prompt}
-        ]
-    )
-
-    mitigations = response['message']['content']
 
     return mitigations
 
@@ -350,87 +319,60 @@ with col2:
 st.sidebar.header("How to use AI-ThreatMaster")
 
 with st.sidebar:
-
-    selected_server = st.selectbox(
-        label="Choose a Server",
-        options=[
-            "OpenAI",
-            "Ollama"
-        ]
-    )
    
+    use_azure = st.toggle('Use Azure OpenAI Service', key='use_azure')
     
-    if selected_server == "OpenAI":
-        use_azure = st.toggle('Use Azure OpenAI Service', key='use_azure')
-
-        if use_azure:
-            st.markdown(
-            """
-            1. Enter the Azure API key, endpoint and deployment name
-            2. Enter the details of the application for the threat model (Technology stack, functionalities etc)
-            3. Use the options such as "Generate Threat Model" or "Generate Mitigations"
-            """
-            )
-
-            azure_api_key = st.text_input(
-                "Azure OpenAI API key:",
-                type="password",
-                help="You can find your Azure OpenAI API key here: [Azure portal](https://portal.azure.com/).",
-            )
-            
-            azure_api_endpoint = st.text_input(
-                "Azure OpenAI endpoint:",
-                help="Eg: https://YOUR_RESOURCE_NAME.openai.azure.com/",
-            )
-
-            azure_deployment_name = st.text_input(
-                "Deployment name:",
-            )
-            
-            st.info("Note: Use an 1106-preview model deployment.")
-
-            azure_api_version = '2023-12-01-preview' # Update this as needed
-
-            st.write(f"Azure API Version: {azure_api_version}")
-
-        else:
-            st.markdown(
-            """
-        1. Enter the API Key: [OpenAI API key](https://platform.openai.com/account/api-keys) 
-        2. Select the GPT version & Provide details of the application 
-        3. Use the options such as "Generate Threat Model" or "Generate Mitigations"
+    if use_azure:
+        st.markdown(
         """
-        )
-            
-            openai_api_key = st.text_input(
-                "Enter your OpenAI API key:",
-                type="password",
-                help="Find your OpenAI API key on the [OpenAI Website](https://platform.openai.com/account/api-keys).",
-            )
+    1. Enter the Azure API key, endpoint and deployment name
+    2. Enter the details of the application for the threat model (Technology stack, functionalities etc)
+    3. Use the options such as "Generate Threat Model" or "Generate Mitigations"
+    """
+    )
 
-            selected_model = st.selectbox(
-                "Select the model you would like to use:",
-                ["gpt-4-1106-preview", "gpt-3.5-turbo-1106"],
-                key="selected_model",
-                help="The 0613 models are updated and more steerable versions. See [this post](https://openai.com/blog/function-calling-and-other-api-updates) for more details.",
-            )
+        azure_api_key = st.text_input(
+            "Azure OpenAI API key:",
+            type="password",
+            help="You can find your Azure OpenAI API key here: [Azure portal](https://portal.azure.com/).",
+        )
+        
+        azure_api_endpoint = st.text_input(
+            "Azure OpenAI endpoint:",
+            help="Eg: https://YOUR_RESOURCE_NAME.openai.azure.com/",
+        )
+
+        azure_deployment_name = st.text_input(
+            "Deployment name:",
+        )
+        
+        st.info("Note: Use an 1106-preview model deployment.")
+
+        azure_api_version = '2023-12-01-preview' # Update this as needed
+
+        st.write(f"Azure API Version: {azure_api_version}")
+
     else:
         st.markdown(
-            """
-            1. Install the Ollama CLI and run `ollama pull llama3` or any other model
-            2. Select the model you would like to use
-            3. Enter the details of the application for the threat model (Technology stack, functionalities etc)
-            4. Use the options such as "Generate Threat Model" or "Generate Mitigations"
-            """
-            )
+        """
+    1. Enter the API Key: [OpenAI API key](https://platform.openai.com/account/api-keys) 
+    2. Select the GPT version & Provide details of the application 
+    3. Use the options such as "Generate Threat Model" or "Generate Mitigations"
+    """
+    )
         
+        openai_api_key = st.text_input(
+            "Enter your OpenAI API key:",
+            type="password",
+            help="Find your OpenAI API key on the [OpenAI Website](https://platform.openai.com/account/api-keys).",
+        )
+
         selected_model = st.selectbox(
             "Select the model you would like to use:",
-            [model['name'] for model in local_models['models']],
+            ["gpt-4-1106-preview", "gpt-3.5-turbo-1106"],
             key="selected_model",
-            help="choose a local model"
+            help="The 0613 models are updated and more steerable versions. See [this post](https://openai.com/blog/function-calling-and-other-api-updates) for more details.",
         )
-    
 
     st.markdown("""---""")
 
@@ -494,19 +436,13 @@ with st.expander("Threat Model", expanded=False):
 
         with st.spinner("....Creating threats..."):
             try:
-                if selected_server == "Ollama":
-                    model_output = get_threat_model_ollama(selected_model, threat_model_prompt)
-                    
-                    threat_model = json.loads(model_output).get("threat_model", [])
-                    improvement_suggestions = json.loads(model_output).get("improvement_suggestions", [])
+                if use_azure:
+                    model_output = get_threat_model_azure(azure_api_key, azure_deployment_name, threat_model_prompt)
                 else:
-                    if use_azure:
-                        model_output = get_threat_model_azure(azure_api_key, azure_deployment_name, threat_model_prompt)
-                    else:
-                        model_output = get_threat_model(openai_api_key, selected_model, threat_model_prompt)
-                            
-                    threat_model = model_output.get("threat_model", [])
-                    improvement_suggestions = model_output.get("improvement_suggestions", [])
+                    model_output = get_threat_model(openai_api_key, selected_model, threat_model_prompt)
+                        
+                threat_model = model_output.get("threat_model", [])
+                improvement_suggestions = model_output.get("improvement_suggestions", [])
 
                 st.session_state['threat_model'] = threat_model
 
@@ -540,13 +476,10 @@ with st.expander("Mitigations", expanded=False):
 
             with st.spinner("Looking for possible mitigations..."):
                 try:
-                    if selected_server == "Ollama":
-                        mitigations_markdown = remediation_ollama(selected_model, mitigations_prompt)
+                    if use_azure:
+                        mitigations_markdown = remediation_azure(azure_api_key, azure_deployment_name, mitigations_prompt)
                     else:
-                        if use_azure:
-                            mitigations_markdown = remediation_azure(azure_api_key, azure_deployment_name, mitigations_prompt)
-                        else:
-                            mitigations_markdown = remediation(openai_api_key, selected_model, mitigations_prompt)
+                        mitigations_markdown = remediation(openai_api_key, selected_model, mitigations_prompt)
 
                     st.markdown(mitigations_markdown)
 
